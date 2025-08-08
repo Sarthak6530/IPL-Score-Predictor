@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPL Score Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🏏 IPL Score Predictor</h1>
+        <form method="POST">
+            <label>Batting Team</label>
+            <select name="batting_team" required>
+                {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Bowling Team</label>
+            <select name="bowling_team" required>
+                {% for team in teams %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Runs</label>
+            <input type="number" name="runs" min="0" required>
+
+            <label>Wickets</label>
+            <input type="number" name="wickets" min="0" max="10" required>
+
+            <label>Overs</label>
+            <input type="number" step="0.1" name="overs" min="0" max="20" required>
+
+            <label>Runs in Last 5 Overs</label>
+            <input type="number" name="runs_last_5" min="0" required>
+
+            <label>Wickets in Last 5 Overs</label>
+            <input type="number" name="wickets_last_5" min="0" max="10" required>
+
+            <button type="submit">Predict Score</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h2>Predicted Final Score: <span>{{ prediction }}</span></h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
